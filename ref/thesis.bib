@@ -211,7 +211,6 @@ day="01",
 volume="43",
 number="1",
 pages="1--19",
-abstract="Multi-tier storage systems are becoming more and more widespread in the industry. They have more tunable parameters and built-in policies than traditional storage systems, and an adequate configuration of these parameters and policies is crucial for achieving high performance. A very important performance indicator for such systems is the response time of the file I/O requests. The response time can be minimized if the most frequently accessed (``hot'') files are located in the fastest storage tiers. Unfortunately, it is impossible to know a priori which files are going to be hot, especially because the file access patterns change over time. This paper presents a policy-based framework for dynamically deciding which files need to be upgraded and which files need to be downgraded based on their recent access pattern and on the system's current state. The paper also presents a reinforcement learning (RL) algorithm for automatically tuning the file migration policies in order to minimize the average request response time. A multi-tier storage system simulator was used to evaluate the migration policies tuned by RL, and such policies were shown to achieve a significant performance improvement over the best hand-crafted policies found for this domain.",
 issn="1573-0484",
 doi="10.1007/s11227-007-0135-3",
 url="https://doi.org/10.1007/s11227-007-0135-3"
@@ -242,4 +241,32 @@ url="https://doi.org/10.1007/s11227-007-0135-3"
   pages={1155--1169},
   year={2003},
   publisher={IEEE}
+}
+
+@article{BWFS,
+  title={BWFS: A distributed file system with large capacity, high throughput and high scalability.},
+  author={Yang, Dezhi and Huang, Hua and Zhang, Jiangang and Xu, Lu},
+  journal={Jisuanji Yanjiu yu Fazhan(Comput. Res. Dev.)},
+  volume={42},
+  number={6},
+  pages={1028--1033},
+  year={2005}
+}
+@inproceedings{DPFS,
+  title={DPFS: A distributed parallel file system},
+  author={Shen, Xiaohui and Choudhary, Alok},
+  booktitle={International Conference on Parallel Processing, 2001.},
+  pages={533--541},
+  year={2001},
+  organization={IEEE}
+}
+@misc{Tiering,
+Howpublished = {\url{https://staged-gluster-docs.readthedocs.io/en/release3.7.0beta1/Features/tier/}},
+Title = {Tiering translator in GlusterFS}
+}
+@article{Red_Hat_Gluster_storage_on_supermicro_storage_servers_powered_by_Intel_Xeon_processors,
+  title={Red Hat Gluster storage on supermicro storage servers powered by Intel Xeon processors},
+  author={Dustin, B},
+  journal={Super Micro computer. https://www.supermicro.com/white\_paper/white\_paper\_Redhat\_Gluster\_Storage.pdf},
+  year={2017}
 }
