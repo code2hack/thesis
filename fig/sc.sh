@@ -1,0 +1,1 @@
+screencapture -i $1
