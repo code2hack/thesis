@@ -94,11 +94,34 @@
 
 %书写正文，可以根据需要增添章节; 正文还包括致谢，参考文献与成果
 \mainmatter
-\input{data/chap1}
-\input{data/chap2}
-\input{data/chap3}
-\input{data/chap4}
-\input{data/chap5}
+
+\input{data/introduction}
+%介绍分层存储-数据迁移在分层存储中的关键作用
+%国内外研究现状：
+%	缓存技术
+%	主动预取技术
+%		马尔科夫
+%		C-miner
+%		LSTM内存级缓存
+%		N-gram对象存储staging
+\input{data/gluster}
+%整体架构
+%模块化
+%Tiering
+\input{data/nlp}
+%词向量
+%	skip-gram
+%	fasttext
+%	采用词向量揭示POSIX文件目录结构逻辑关系
+%循环神经网络
+%	循环神经网络简介
+%	循环神经网络在序列分析中的应用
+%	结合前人采用马尔科夫模型、C-miner、N-Gram等的成功经验，阐述循环神经网络用于I/O访问模式分析的可能，并建立模型
+\input{data/experiments}
+%gluster tiering 模块实验
+%针对工作负载的文件向量化实验（可视化）
+%采用循环神经网络进行文件冷热预测
+\input{data/summary}
 
 
 \input{data/ack}

@@ -1,11 +1,9 @@
-\chapter{基于分布式文件系统GlusterFS的数据迁移研究}
-
-\section{GlusterFS介绍}
+\chapter{分布式文件系统GlusterFS}
 
 GlusterFS\cite{GlusterFS}是一个开源、扩展能力强大的分布式文件系统，其客户端与存储服务器可通过InfiniBand RDMA或者TCP/IP等多种方式连接，并使用统一的命名空间管理数据，可将不同类型的存储服务器整合在同一个命名空间中，从而为各种工作负载和应用场景提供出色的性能。 GlusterFS服务器兼容POSIX标准，支持诸如ext4、XFS等{\color{orange}扩展属性文件系统}，可以使用包括（Network File System）和SMB（Server Message BLock）等在内的业界标准访问协议进行访问。GlusterFS专为当前高性能虚拟化云环境而设计，也可用于在并行文件系统之上搭建大规模科学与工程计算文件系统。 
 
 本节将对GlusterFS的架构与原理作简要介绍，并重点分析其数据迁移模块Tiering。
-\subsection{整体架构和原理}
+\section{整体架构和原理}
 %\begin{itemize}
 %    \item 全局命名空间。
 %    \item 集群存储管理。
@@ -38,7 +36,7 @@ GlusterFS\cite{GlusterFS}是一个开源、扩展能力强大的分布式文件�
 \end{figure}
 GlusterFS是一个用户空间文件系统，采用了FUSE（File System in Userspace）{\color{red}(此处应有引用)}作为用户态程序与内核文件系统交互的接口。如图\ref{fig:fuse}所示，
 
-\subsection{层叠式模块设计}
+\section{GlusterFS的层叠式模块设计}
 \begin{figure}[htp]
 \centering
 \includegraphics[width=\textwidth]{translators}
@@ -62,7 +60,7 @@ GlusterFS主要包括以下几组translator模块:
     \item 调试模块组（Debug Translators）。
 \end{enumerate}
 
-\subsection{Tiering模块}
+\section{Tiering模块}
 \begin{figure}[htp]
 \centering
 \includegraphics[width=\textwidth]{tiering}
@@ -132,8 +130,7 @@ LINK\_UPDATE & 文件重命名标志\\
 
 其本质原因是随着小文件数量大幅增加，且多客户端的并发文件请求数量上升时，传统缓存置换算法考虑的时间局部性和空间局部性失去效用，仅仅简单地以文件访问频率作为考量不足以分析提取复杂场景下的I/O访问模式。
 
-
-\subsection{Trace 模块}
+\subsection{Trace模块}
 \subsection{访问模式识别模型建立}
 \subsection{运行时缓存管理}
 
