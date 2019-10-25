@@ -43,7 +43,7 @@
 %5. 如果想生成盲评，传递anon即可，仍需修改个人成果部分
 % \documentclass[master,otf,anon]{nudtpaper}
 %
-\documentclass[master,otf]{nudtpaper}
+\documentclass[master,otf,anon]{nudtpaper}
 %----DELETE-----%
 \usepackage{notes}
 \numberwithin{equation}{chapter}
@@ -57,11 +57,12 @@
 \serialno{17060062}
 \confidentiality{公开}
 \UDC{681???}
-\title{基于自然语言模型的文件访问模式分析与文件预取方法研究}
-\displaytitle{基于自然语言模型的文件访问模式分析与文件预取方法研究}
+\title{基于自然语言处理的热点数据识别及应用技术研究}
+%\title{基于自然语言模型的文件访问模式分析与文件预取方法研究}
+\displaytitle{基于自然语言处理的热点数据识别及应用技术研究}
 \author{陈辉}
 \zhdate{\zhtoday}
-\entitle{An NLP Model-Based Mechanism for I/O Access Pattern Analysis and File Prefetching}
+\entitle{Research on Hotspot Identification and Application Technology Based on Natural Language Processing}
 \enauthor{Hui Chen}
 \endate{\entoday}
 \subject{计算机科学与技术}
@@ -104,10 +105,6 @@
 %		C-miner
 %		LSTM内存级缓存
 %		N-gram对象存储staging
-\input{data/gluster}
-%整体架构
-%模块化
-%Tiering
 \input{data/nlp}
 %词向量
 %	skip-gram
@@ -116,7 +113,16 @@
 %循环神经网络
 %	循环神经网络简介
 %	循环神经网络在序列分析中的应用
+
+\input{data/models}
+
 %	结合前人采用马尔科夫模型、C-miner、N-Gram等的成功经验，阐述循环神经网络用于I/O访问模式分析的可能，并建立模型
+
+%\input{data/gluster}
+%整体架构
+%模块化
+%Tiering
+
 \input{data/design}
 \input{data/experiments}
 %gluster tiering 模块实验
