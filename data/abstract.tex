@@ -1,12 +1,29 @@
 \begin{cabstract}
+分层存储是计算机存储领域的一项重要技术，其核心设计是将数据存储在多层级的存储介质中，通过热点文件识别和数据迁移技术来掩盖访问延迟以及增加吞吐率。分层存储管理的本质是准确、实时的文件分类，当存储层次较多时，可以转化为相邻层级之间热点数据和冷数据的二分类任务。文件分类的准确率十分依赖于对应用I/O行为的理解。本文工作主要包括以下两部分：
+
+%1. 文件静态关联分析。我们提出了两条假设。第一条假设是POSIX文件系统的目录结构具有与自然语言相似的性质，即分布式语义假设。基于该假设，我们使用词嵌入模型将POSIX文件系统中的文件名、目录名映射为高维向量，以量化的方式分析它们之间的语义关联。第二条假设是一条完整路径的各级子向量可以线性相加，得到的结果可以近似表示该文件在文件系统空间中的位置。基于该假设我们提出了路径向量的概念。
+文件关联分析。数据块关联性广泛存在于存储系统中，以往的研究通常从POSIX文件目录的树形结构入手，无法充分挖掘语义上的关联性。本文使用词嵌入模型将POSIX文件系统中的文件和目录映射为高维向量，将文件或目录之间的语义关联转化为向量空间中的内积计算，并通过降维可视化的方式予以直观呈现。
+%2. I/O行为分析。在上述静态分析的基础上，我们提出了第三条假设：应用的I/O行为研究，可以转化为路径向量的序列分析问题。基于该假设，我们建立了循环神经网络来分析路径向量序列，最终用于解决文件的冷热分类任务，并利用GlusterFS中的tiring模块设计了一套智能分层存储管理的初步方案。
+
+基于I/O行为分析的冷热文件分类。目前，该领域的研究通常局限于短期I/O请求序列的分析和预测，难以在较长时间跨度上挖掘应用的I/O行为模式。本文在文件和目录向量化表示的基础上，使用循环神经网络分析I/O请求序列，最终用于解决文件的冷热分类任务，并利GlusterFS文件系统中的tiring模块设计了一套智能分层存储管理的初步方案。
+
+为验证模型的合理性，本文以开源工程代码编译为工作负载设计了文件冷热分类实验。实验结果表明，对于单进程编译任务，在经过参数调优后可以达到较高的热点文件识别率，且冷数据被误判的概率控制在较低水平。
 
 \end{cabstract}
-\ckeywords{分布式文件系统；文件预取；{\color{red}词向量}；循环神经网络}
+\ckeywords{分层存储；数据迁移；访问模式；词嵌入；循环神经网络}
 
 \begin{eabstract}
-Many applications spend a large proportion of the execution time to access ﬁles. To narrow the increasing gap between computing and I/O performance, several optimization techniques were adopted, such as data prefetching and data layout optimization. However, the effectiveness of these optimization processes heavily depends on the understanding of the I/O behavior. Traditionally, spatial locality and temporal locality are mainly considered for data prefetching and scheduling policy. Whereas for most real-world workloads, the ﬁle access pattern is hard to capture.
+Tierd storage is an import technology in the field of computer storage, which stores data in multiple tiers, masking latency and increasing throughput through file classification and data migration techniques. In fact, the main purpose of hierarchical storage management is to correctly classify files in runtime. When dealing with multi-tired storage system, this mission can be splitted into several sub-missions of binary classification. However, the correctness of file classification heavily depends on the understanding of the I/O behavior. Our research focuses on two aspects.
 
-For the goal of deeply and intelligently understanding the I/O access pattern of modern applications, and efficiently optimizing the performance of current file systems, we propose a new mechanism to embed file names to vectors and train a GRNN (Gated Recurrent Neural Network) to provide policies for file prefetching and cache replacing.
+%Analysis on file correlations. In this part, we propose two assumptions. The first is the distributional hypothesis that the directory structure of POSIX file system is similar to natural language. Based on this hypothesis, we utilize word embedding model to map file names and directory names to high-dimension vectors, analyzing the semantic correlations among those names in a quantified manner. The other is that we could sum up those sub-vectors of a full path to approximately represent this path in the space of file system. Thus, we propose a concept named path vector. 
+
+Analysis on file correlations. File correlations are common in storage systems. Recent researches in this area often focus on the tree structured directory of POSIX file systems which were unable to reveal the implicit semantic correlations among files and directories. We utilize word embedding model to map file names and directory names to high-dimension vectors, analyzing the semantic correlations among them by dot products. With the word embedding model trained, we show the semantic correlations with PCA and visualization.
+
+%Sequential analysis on I/O behavior. Based on aforementioned works, we propose the third assumption, that the research on I/O behavior could be reframed to sequential analysis on path vectors. We build an RNN model to achieve this goal and design a hierarchical storage management solution based on tiering translator in GlusterFS.
+
+File classification based on sequential analysis on I/O behavior. Recent works were not capable of long-term analysis. In this paper, based on aforementioned works, we build an RNN model to analyze the I/O behavior and design a hierarchical storage management solution based on tiering translator in GlusterFS.
+
+To verify these models, we designed file calssification experiments with compiling workloads. The results show that our model performs well in single-process compiling, that the accuracy of hotspot indentification(recall rate) is good with fine-tuned hyperparameters, and the false positive rate controlled bellow.
 \end{eabstract}
-\ekeywords{Distributed File Systems, File Prefetching, Word Embedding, RNN}
+\ekeywords{Tiered Storage, Data Migration, Access Pattern, Word Embedding, RNN}
 

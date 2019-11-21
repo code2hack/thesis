@@ -43,26 +43,29 @@
 %5. 如果想生成盲评，传递anon即可，仍需修改个人成果部分
 % \documentclass[master,otf,anon]{nudtpaper}
 %
-\documentclass[master,otf,anon]{nudtpaper}
-%----DELETE-----%
-\usepackage{notes}
-\numberwithin{equation}{chapter}
-\numberwithin{figure}{chapter}
-%----DELETE-----%
+\documentclass[master,otf]{nudtpaper}
+
+%%----DELETE-----%
+%\usepackage{notes}
+%\numberwithin{equation}{chapter}
+%\numberwithin{figure}{chapter}
+%%----DELETE-----%
+%\usepackage{pdfpages}
+
 \usepackage{lmodern}
 \usepackage{mynudt}
 \usepackage{multirow,array}
 
-\classification{TP391???}
+\classification{TP399}
 \serialno{17060062}
 \confidentiality{公开}
-\UDC{681???}
-\title{基于自然语言处理的热点数据识别及应用技术研究}
+\UDC{004.8}
+\title{基于自然语言处理的热点数据识别\\及应用技术研究}
 %\title{基于自然语言模型的文件访问模式分析与文件预取方法研究}
 \displaytitle{基于自然语言处理的热点数据识别及应用技术研究}
 \author{陈辉}
 \zhdate{\zhtoday}
-\entitle{Research on Hotspot Identification and Application Technology Based on Natural Language Processing}
+\entitle{Research on Hot File Identification and Application Technology Based on Natural Language Processing}
 \enauthor{Hui Chen}
 \endate{\entoday}
 \subject{计算机科学与技术}
@@ -91,43 +94,55 @@
 
 \midmatter
 \input{data/abstract}
-\input{data/denotation}
 
-%书写正文，可以根据需要增添章节; 正文还包括致谢，参考文献与成果
 \mainmatter
 
 \input{data/introduction}
-%介绍分层存储-数据迁移在分层存储中的关键作用
-%国内外研究现状：
-%	缓存技术
-%	主动预取技术
-%		马尔科夫
-%		C-miner
-%		LSTM内存级缓存
-%		N-gram对象存储staging
+% a)	不同存储层次存储介质，其性能和功能特点差异描述（数据、曲线），突出分层的意义。
+% b)	缓存技术需要一个总结，阐明其问题缺陷，直接用于热点数据识别的劣势；
+% 	主动预取，需要丰富若干文献；
+% c)	本章篇幅少，广度和深度不够。
+
+
+
+\input{data/ts}
 \input{data/nlp}
-%词向量
-%	skip-gram
-%	fasttext
-%	采用词向量揭示POSIX文件目录结构逻辑关系
-%循环神经网络
-%	循环神经网络简介
-%	循环神经网络在序列分析中的应用
+%分层存储和自然语言处理合并为一章：相关工作介绍，质量可以适当降低。
+% 引言：概述分层存储特点-》分层存储管理的重要性->j
+% 2.1 分层存储
+% 	2.1.1 分层存储模型
+% 	2.1.2 数据分类
+% 	2.1.3 分层存储管理
+% 		数据关联挖掘；N-GRAM模型；缺陷
+% 2.2 自然语言处理相关技术
+% 	2.2.1 词嵌入：突出词嵌入能表达语义关联的特性；可视化展现；
+% 	2.2.2 循环神经网络：突出RNN在序列分析中的作用。举例LSTM用于内存访问预测的论文；
 
 \input{data/models}
 
-%	结合前人采用马尔科夫模型、C-miner、N-Gram等的成功经验，阐述循环神经网络用于I/O访问模式分析的可能，并建立模型
+% 基于自然语言处理的文件分类模型
+% 引言：放个总框图，直观展示两项主要工作
+% 3.1	基于词嵌入模型的文件关联分析
+% 	3.1.1 具体模型(skip-gram+subword)
+% 		词与词之间关联；
+% 		线性相加后表达文件之间关联。
+% 		注意加图：skipgram的图
+% 	3.1.2 词向量模型可视化:
+% 		tnse
+% 3.2	基于RNN的冷热分类模型
+% 	3.2.1 基于单层GRNN的冷热分类模型
+% 	3.2.2 分类阈值讨论
 
-%\input{data/gluster}
-%整体架构
-%模块化
-%Tiering
 
 \input{data/design}
+% 引言：总框图，描述
+% 4.1 客户端设计
+% 4.2 服务端设计
+
 \input{data/experiments}
 %gluster tiering 模块实验
 %针对工作负载的文件向量化实验（可视化）
-%采用循环神经网络进行文件冷热预测
+%采用循环神经网络进行文件冷热分类
 \input{data/summary}
 
 
@@ -139,11 +154,12 @@
 \bibliographystyle{bstutf8}
 \bibliography{ref/thesis}
 
-%\input{data/resume}
+\input{data/resume}
 
 % 最后，需要的话还要生成附录，全文随之结束。
-\appendix
+%\appendix
 \backmatter
-\input{data/appendix01}
+%\input{data/appendix01}
 
 \end{document}
+
